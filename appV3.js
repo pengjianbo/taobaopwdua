@@ -1,15 +1,22 @@
+var express = require('express');
+var app = express();
 var jsdom = require("jsdom");
-var http = require('http');
 
-http.createServer(function (request, response) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    
-    GetRsgPwd(response);
- }).listen(8124);
+app.get('/', function(req, res){
+  //res.send('hello world');
+  var oldPwd = req.query["password"];
+  if(oldPwd != undefined)
+  {
+     GetRsgPwd(res, oldPwd)
+  }
+  else
+      res.send('can shu cuo wu');
+});
 
-console.log('Server running at http://127.0.0.1:8124/');
+app.listen(3000);
 
-function GetRsgPwd(response)
+
+function GetRsgPwd(response, oldPwd)
 {
     jsdom.env({
         url: "https://login.taobao.com/member/login.jhtml",
@@ -20,22 +27,6 @@ function GetRsgPwd(response)
         var $ = window.$;
         console.log("dom is done");
         
-        // kissy config
-        // var a = 'file:' === window.location.protocol || window.location.href.indexOf('local=1') >= 0,
-        //     b = window.location.href.indexOf('daily.taobao.net') > 0;
-        // window.location.protocol;
-        // window.KISSY.config({
-        //     combine: !a && !b,
-        //     packages: [
-        //         {
-        //             name: 'kg',
-        //             tag: '1358514278',
-        //             path: '//g.alicdn.com/',
-        //             charset: 'gbk'
-        //         }
-        //     ]
-        // });
-        
         window.KISSY.use("kg/rsa/2.0.1/index",function (S,e)
         {
             var rsa = new e;
@@ -43,14 +34,11 @@ function GetRsgPwd(response)
             // var pbk = "9a39c3fefeadf3d194850ef3a1d707dfa7bec0609a60bfcc7fe4ce2c615908b9599c8911e800aff684f804413324dc6d9f982f437e95ad60327d221a00a2575324263477e4f6a15e3b56a315e0434266e092b2dd5a496d109cb15875256c73a2f0237c5332de28388693c643c8764f137e28e8220437f05b7659f58c4df94685";
             var exponent = "10001";
             rsa.setPublic(pbk, exponent);
-            var a = rsa.encrypt("1qazXDR%^YHN");
-            response.end(a);
+            var a = rsa.encrypt(oldPwd);
+            response.send(a);
             console.log(a);
         });
     }
     });
     
 }
-
-
-
