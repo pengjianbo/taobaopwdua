@@ -6,7 +6,7 @@ app.get('/', function(req, res){
   var oldPwd = req.query["password"];
   if(oldPwd != undefined)
   {
-     GetRsgPwd(res, oldPwd)
+     GetEncryptPassword(res, oldPwd)
   }
   else
       res.send('can shu cuo wu');
@@ -15,7 +15,7 @@ app.get('/', function(req, res){
 app.listen(3000);
 
 
-function GetRsgPwd(response, oldPwd)
+function GetEncryptPassword(response, oldPwd)
 {
     dom.KISSY.use("kg/rsa/2.0.1/index",function (S,e)
     {
@@ -25,7 +25,8 @@ function GetRsgPwd(response, oldPwd)
         var exponent = "10001";
         rsa.setPublic(pbk, exponent);
         var a = rsa.encrypt(oldPwd);
-        response.send(a);
-        console.log(a);
+        var resultJson = '{ IsSuccess:true, EncryptPassword:"'+ a + '" }';
+        response.send(resultJson);
+        console.log(resultJson);
     });
 }
