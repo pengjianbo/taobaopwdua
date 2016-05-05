@@ -17,6 +17,10 @@ jsdom.env(
             console.log("dom is done");
             exports.$ = window.$;
             exports.KISSY = window.KISSY;
+            
+            // setTimeout(function(){
+            //     console.log(window['_n']);
+            // },5000);
         } catch (error) {
             console.log(error)
         }

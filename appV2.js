@@ -27,7 +27,7 @@ var html;
 jsdom.env({
     url: "https://login.taobao.com/member/login.jhtml",
     scripts: [
-                    "http://code.jquery.com/jquery.js" // jquery 
+                   "https://code.jquery.com/jquery-1.11.3.js" // jquery
                 // , "https://g.alicdn.com/kissy/k/1.4.4/seed-min.js" // kissy js
                 // , "https://g.alicdn.com/tb/login/0.5.11/js/login/nlogin.js?t=20151220"
                 // , "https://g.alicdn.com/sd/ncpc/nc.js?t=2016040811" 
@@ -55,6 +55,11 @@ jsdom.env({
     done: function (err, window, kissy) {
         var $ = window.$;
         console.log("dom is done");
+        
+        setTimeout(function() {
+          console.log(window._n);
+          html = $('body').html();
+        }, 3000);
         
         // var UA_Opt = {};
         // UA_Opt.ExTarget = ['TPL_password_1','TPL_password_2','J_Pwd1','J_PwdV'];
