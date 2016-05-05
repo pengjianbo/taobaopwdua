@@ -1,18 +1,17 @@
 var express = require('express');
-var app = express();
+var router  = express.Router();
 var dom = require('./initDom.js');
 
-app.get('/', function(req, res){
-  var oldPwd = req.query["password"];
-  if(oldPwd != undefined)
-  {
-     GetEncryptPassword(res, oldPwd)
-  }
-  else
-      res.send('can shu cuo wu');
+router.get('/',function(req, res){
+    var oldPwd = req.query["password"];
+    if(oldPwd != undefined)
+    {
+        GetEncryptPassword(res, oldPwd)
+    }
+    else
+        res.send('can shu cuo wu');
 });
-
-app.listen(3000);
+module.exports = router;
 
 
 function GetEncryptPassword(response, oldPwd)
