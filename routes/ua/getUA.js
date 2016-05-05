@@ -75,7 +75,7 @@ function getDomUa(req, res) {
         // console.log("dom is done");
 
 
-        // ua �첽���ɣ��޷�ֱ�ӻ�ȡ������1.5s����
+        // ua 异步生成，设置延时将生成的ua 输出
         setTimeout(function () {
           console.log(window._n);
           res.send(window._n);

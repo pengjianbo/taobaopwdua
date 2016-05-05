@@ -2,11 +2,11 @@ var express = require('express');
 var app = express();
 var path = require('path');
 
-// ´¦ÀíÂ·ÓÉ
+// å¤„ç†js
 var tbpwd = require('./routes/password/getPassword');
 var tbua = require('./routes/ua/getUA');
 
-// /** ÔÊĞí¿çÓò*/
+// /** å…è®¸è·¨åŸŸ*/
 // app.all('*',function (req, res, next) 
 // {
 //     res.header('Access-Control-Allow-Origin', '*');
@@ -20,10 +20,10 @@ var tbua = require('./routes/ua/getUA');
 //     }
 // });
 
-// Ê¹ÓÃexpress ·ÃÎÊ¾²Ì¬ÎÄ¼ş
+// ä½¿ç”¨express è®¿é—®é™æ€æ–‡ä»¶
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Ö¸¶¨Â·ÓÉ
+// æŒ‡å®šè·¯ç”±
 app.use('/getPassword', tbpwd);
 app.use('/getUA', tbua);
 
