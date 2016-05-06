@@ -2,6 +2,7 @@ var jsdom = require("jsdom");
 var express = require('express');
 var router = express.Router();
 var app = express();
+var config = require('../../config.js');
 
 router.get('/', function (req, res) {
   getDomUa(req, res);
@@ -56,7 +57,7 @@ function getDomUa(req, res) {
   if (behaviorTraceId == "" || behaviorTraceId == undefined)
     behaviorTraceId = "47dccb7f99fcf793c60ae0431f6265cd";
 
-  var url = "http://localhost:8000/getUA/initPageForUA" + "?token=" + token + "&behaviorTraceId=" + behaviorTraceId;
+  var url = "http://localhost:" + config.port + "/getUA/initPageForUA" + "?token=" + token + "&behaviorTraceId=" + behaviorTraceId;
 
   jsdom.env(
     {

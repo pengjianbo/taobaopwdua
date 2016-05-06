@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var config = require('./config');
 
 // 处理js
 var tbpwd = require('./routes/password/getPassword');
@@ -45,6 +46,6 @@ app.use(function (err, req, res, next) {
     });
 });
 
-app.listen(8000, function () {
-    console.log('app listen 8000');
+app.listen(config.port, function () {
+    console.log('app listen ' + config.port + '');
 });
