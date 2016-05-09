@@ -1,5 +1,5 @@
 var config =
     {
-        port: 8000
+        port: 3001
     };
 module.exports = config;
